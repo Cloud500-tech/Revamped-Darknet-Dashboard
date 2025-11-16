@@ -1,0 +1,42 @@
+[
+  {
+    "id": "json_001",
+    "source": "dark_web_forum",
+    "description": "Corporate credentials breach",
+    "content": "Login credentials for employees at @company.com with passwords exposed",
+    "leaked_date": "2024-03-30",
+    "severity": "critical"
+  },
+  {
+    "id": "json_002",
+    "source": "paste_site",
+    "description": "API token leak",
+    "content": "Multiple API keys and access tokens from production environment",
+    "leaked_date": "2024-03-31",
+    "severity": "high"
+  },
+  {
+    "id": "json_003",
+    "source": "onion_marketplace",
+    "description": "Financial data dump",
+    "content": "Credit card numbers with CVV and SSN information",
+    "leaked_date": "2024-04-01",
+    "severity": "critical"
+  },
+  {
+    "id": "json_004",
+    "source": "telegram_channel",
+    "description": "Database backup",
+    "content": "PostgreSQL database dump containing user credentials and emails",
+    "leaked_date": "2024-04-02",
+    "severity": "high"
+  },
+  {
+    "id": "json_005",
+    "source": "breach_archive",
+    "description": "General user data",
+    "content": "User profiles and contact information from web service",
+    "leaked_date": "2024-04-03",
+    "severity": "moderate"
+  }
+]

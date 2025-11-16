@@ -1,0 +1,31 @@
+id,source,description,content,leaked_date,severity
+1,darkforum_001,User credentials dump,Database contains user passwords and email addresses,2024-01-15,critical
+2,marketplace_alpha,Payment info leak,Credit card numbers found in transaction logs,2024-01-18,high
+3,paste_site_42,API key exposure,API key leaked in public paste,2024-01-20,high
+4,breach_db_01,Corporate email list,Employee emails from @company.com domain,2024-01-22,moderate
+5,underground_forum,SSN database,Social security numbers leaked from healthcare provider,2024-01-25,critical
+6,telegram_chan,Login credentials,Username and password combinations for various sites,2024-01-28,high
+7,onion_market,Financial records,Bank account details and credit card info,2024-02-01,critical
+8,paste_archive,Code repository,Source code with embedded credentials and API keys,2024-02-03,high
+9,leak_db_main,Customer database,User data with passwords and company email addresses,2024-02-05,critical
+10,forum_post_991,Authentication tokens,Access tokens and API keys from mobile app,2024-02-08,high
+11,breach_collection,Employee SSN list,Social security numbers from company payroll system,2024-02-10,critical
+12,dark_marketplace,Credit card dump,Stolen credit card information with CVV codes,2024-02-12,critical
+13,paste_service,Configuration file,Database connection strings with passwords,2024-02-15,high
+14,telegram_leak,Corporate credentials,Login information for @company.com accounts,2024-02-18,high
+15,onion_forum,Healthcare data,Patient records including SSN and medical info,2024-02-20,critical
+16,breach_archive,API credentials,Multiple API keys and access tokens leaked,2024-02-22,high
+17,darkweb_db,Payment gateway data,Credit card processing system database with passwords,2024-02-25,critical
+18,public_paste,Email dump,Email addresses from various company domains,2024-02-28,moderate
+19,underground_db,Authentication DB,User credentials and password hashes from auth system,2024-03-01,critical
+20,forum_archive,SSH keys,Private SSH keys and server credentials leaked,2024-03-03,high
+21,leak_site_99,Admin passwords,Administrator account passwords for company systems,2024-03-05,critical
+22,paste_bin_alt,Token exposure,OAuth tokens and API keys from web application,2024-03-08,high
+23,dark_forum_main,SSN collection,Social security numbers from multiple data breaches,2024-03-10,critical
+24,marketplace_beta,Card numbers,Credit card numbers and expiration dates leaked,2024-03-12,critical
+25,breach_tracker,Corporate email breach,Employee database with @company.com email addresses and passwords,2024-03-15,critical
+26,onion_board,Database backup,MySQL database dump containing user credentials,2024-03-18,high
+27,telegram_group,API documentation,Internal API documentation with authentication keys,2024-03-20,moderate
+28,paste_leak,Server config,Server configuration files with database passwords,2024-03-22,high
+29,underground_market,Personal info,Names addresses SSN and credit card details,2024-03-25,critical
+30,darknet_forum,Login database,Massive database of username password combinations,2024-03-28,critical
