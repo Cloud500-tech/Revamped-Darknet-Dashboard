@@ -1,266 +1,147 @@
-# darknet-leak-detector
-Simulated Darknet Data Leak Detection Dashboard
+# Darknet Leak Detector
+*A Simulated Darknet Data Leak Detection Dashboard*  
+(Flask API + React/Tailwind Frontend)
 
-A Python-based system that simulates dark web data leak detection by scanning datasets for sensitive information patterns and keywords. The system identifies potential leaks and assigns risk levels based on the detected patterns.
+This project simulates a darknet monitoring system for academic and research purposes.
+It consists of:
 
-**Now featuring a comprehensive web dashboard** with real-time visualization, interactive charts, threat feed monitoring, and advanced filtering capabilities - styled with a professional cyber intelligence theme.
+- A **Python backend (Flask)** that loads synthetic darknet leaks, analyzes patterns, and exposes structured API endpoints.
+- A **React + Tailwind dashboard** that visualizes leaks through analytics, charts, tables, and on-demand reports.
+- A **Figma-styled UI** integrated into a cybersecurity-themed interface.
 
-## Features
+No real darknet data is accessed. All data is synthetic and generated for educational use only.
 
-### Backend Detection Engine
+---
 
-- **Multi-format Data Loading**: Supports both CSV and JSON data formats
-- **Pattern-based Detection**: Scans for sensitive keywords including:
-  - Passwords and credentials
-  - Credit card information
-  - Social Security Numbers (SSN)
-  - Email addresses (including company domains like @company.com)
-  - API keys and access tokens
-  - Database information
-- **Risk Scoring**: Assigns risk scores (0-100) based on detected patterns
-- **Risk Level Classification**: Categorizes entries as low, moderate, or high risk
-- **Summary Reports**: Generates comprehensive statistics and pattern frequency analysis
-- **Export Capabilities**: Export scan results to JSON or CSV formats
+# 🔧 Features
 
-### Web Dashboard
+### Backend (Python / Flask)
+- Synthetic darknet leak generator
+- Leak detection engine with:
+  - Severity scoring
+  - Risk classification
+  - Pattern extraction
+- JSON + CSV dataset support
+- CSV export of **all leaks**
+- Summary endpoint for dashboard analytics
 
-- **Interactive Visualizations**: Multiple chart types (pie, donut, bar, time-series)
-- **Real-time KPI Monitoring**: Track total leaks, high-risk entries, and average risk scores
-- **Live Threat Feed**: Real-time table with timestamps, IPs, countries, sources, and risk levels
-- **Domain Risk Assessment**: Identify affected domains with aggregated risk metrics
-- **Advanced Filtering**: Search and filter by IP, domain, source, severity, and risk level
-- **Responsive Design**: Dark cyber intelligence theme optimized for security monitoring
-- **Built with Dash & Plotly**: Professional, interactive data visualization framework
+### Frontend (React / Vite / Tailwind)
+- Interactive cyber-style dashboard UI
+- Analytics: severity, sources, patterns, timelines
+- Live threat feed
+- Report generation with timestamps
+- CSV export per report
+- CSV export of full leak dataset
 
-## Installation
+---
 
-No external dependencies required! The system uses only Python standard library modules.
+# 🚀 How to Run the Darknet Leak Detector
 
-```bash
-# Clone the repository
-git clone https://github.com/Cloud500-tech/darknet-leak-detector.git
-cd darknet-leak-detector
+This system requires **two terminals**:
+one for the Backend (Flask) and one for the Frontend (React).
 
-# Python 3.6+ required
-python3 --version
-```
+## 1. Start the Backend (Flask API)
 
-## Usage
-
-### Quick Start
-
-Run the detector with the included sample dataset:
+From the project root:
 
 ```bash
-python3 detector.py
-```
-
-### Using as a Module
-
-```python
-from detector import LeakDetector
-
-# Initialize the detector
-detector = LeakDetector()
-
-# Load data from CSV
-detector.load_csv('sample_data.csv')
-
-# Or load from JSON
-# detector.load_json('sample_data.json')
-
-# Scan all entries
-results = detector.scan_all()
-
-# Generate summary
-summary = detector.generate_summary()
-print(f"Total entries: {summary['total_entries']}")
-print(f"High risk entries: {summary['high_risk_count']}")
-print(f"Average risk score: {summary['average_risk_score']}")
-
-# Get high-risk entries
-high_risk = detector.get_high_risk_entries()
-for entry in high_risk:
-    print(f"Risk Score: {entry['risk_score']}")
-    print(f"Patterns: {entry['detected_patterns']}")
-
-# Export results
-detector.export_results('results.json', format='json')
-detector.export_results('results.csv', format='csv')
-```
-
-### Sample Dataset
-
-The repository includes `sample_data.csv` with 30 simulated data leak entries containing various types of sensitive information. Each entry includes:
-
-- **id**: Unique identifier
-- **source**: Origin of the leak (forum, marketplace, etc.)
-- **description**: Brief description of the leak
-- **content**: Details about what was leaked
-- **leaked_date**: Date of the leak
-- **severity**: Initial severity assessment
-
-## Risk Scoring System
-
-The detector uses a weighted scoring system:
-
-| Pattern Type | Weight | Description |
-|-------------|--------|-------------|
-| Credit Card | 50 | Credit card numbers, payment info |
-| SSN | 50 | Social Security Numbers |
-| API Keys | 45 | API keys, access tokens |
-| Company Email | 40 | Emails with @company.com domain |
-| Database | 35 | Database references |
-| Credentials | 35 | Login credentials |
-| Password | 30 | Password references |
-| Email | 20 | General email addresses |
-
-### Risk Level Thresholds
-
-- **Low**: 0-39 points
-- **Moderate**: 40-74 points
-- **High**: 75-100 points
-
-## Output Example
-
-```
-=== Scan Summary ===
-Total entries scanned: 30
-Average risk score: 39.17
-
-Risk Distribution:
-  High: 5
-  Moderate: 9
-  Low: 16
-
-Most common patterns:
-  database: 10
-  credit_card: 6
-  ssn: 5
-  credentials: 4
-  password: 3
-```
-
-## API Reference
-
-### LeakDetector Class
-
-#### Methods
-
-- `load_csv(filepath)`: Load data from a CSV file
-- `load_json(filepath)`: Load data from a JSON file
-- `scan_entry(entry)`: Scan a single entry and return results
-- `scan_all()`: Scan all loaded entries
-- `generate_summary()`: Generate summary statistics
-- `get_high_risk_entries()`: Get all high-risk entries
-- `export_results(filepath, format)`: Export results to file
-
-## Web Dashboard
-
-A comprehensive web-based dashboard is now available for real-time visualization and monitoring of detected leaks. The dashboard provides an interactive cyber intelligence interface with dark theme styling.
-
-### Dashboard Features
-
-- **Real-time KPI Metrics**:
-  - Total Leaks Detected
-  - High Risk Entries Count
-  - Average Risk Score
-  - Active Sources Count
-
-- **Interactive Visualizations**:
-  - Leak Type Distribution (Pie Chart)
-  - Risk Level Distribution (Donut Chart)
-  - Leak Sources (Bar Chart)
-  - Severity Levels (Bar Chart)
-  - Timeline Chart (Time-series of leaks over time)
-
-- **Live Threat Feed Table**:
-  - Timestamp
-  - IP Address
-  - Country
-  - Source
-  - Type
-  - Risk Level
-  - Risk Score
-  - Sortable and filterable columns
-
-- **Domain Risk Assessment Table**:
-  - Affected domains
-  - Number of leaks per domain
-  - Average risk score
-  - Risk level
-  - Last detected timestamp
-
-- **Search & Filter Capabilities**:
-  - Search by IP address or domain
-  - Filter by source
-  - Filter by severity (Critical, High, Moderate, Low)
-  - Filter by risk level (High, Moderate, Low)
-
-### Dashboard Installation
-
-Install the required dependencies:
-
-```bash
+cd backend
 pip install -r requirements.txt
+python api.py
 ```
 
-### Running the Dashboard
+If it loads successfully, you’ll see:
 
-Start the dashboard server:
+```
+Running on http://127.0.0.1:8000
+```
+
+Keep this terminal open.
+
+---
+
+## 2. Start the Frontend (React Dashboard)
+
+Open a **second terminal**:
 
 ```bash
-python3 dashboard.py
+cd frontend
+npm install
+npm run dev
 ```
 
-The dashboard will be available at `http://127.0.0.1:8050`
+You will see:
 
-### Dashboard Usage
+```
+Local: http://localhost:3000
+```
 
-1. **Navigate** to the dashboard URL in your web browser
-2. **Use the filters** at the top to narrow down results:
-   - Enter IP addresses or domains in the search box
-   - Select specific sources from the dropdown
-   - Filter by severity level
-   - Filter by risk level
-3. **View visualizations** that update in real-time based on your filters
-4. **Explore the threat feed** table with sortable columns
-5. **Review domain risk assessments** to identify affected domains
+Open that URL to access the dashboard UI.
 
-### Quick Start Script
+---
 
-For convenience, use the provided launch script:
+## Quick Summary
+
+### Terminal 1
+```bash
+cd backend
+python api.py
+```
+
+### Terminal 2
+```bash
+cd frontend
+npm run dev
+```
+
+- Dashboard runs at: **http://localhost:3000**
+- Backend API runs at: **http://127.0.0.1:8000**
+
+---
+
+# 🧪 Generate Synthetic Darknet Data (Optional)
+
+To generate hundreds of realistic synthetic leaks (for testing charts and reports):
 
 ```bash
-chmod +x run_dashboard.sh
-./run_dashboard.sh
+cd backend
+python generate_synthetic_data.py
+python api.py   # restart backend
 ```
 
-### Dashboard Screenshots
+This overwrites:
+- `sample_data.json`
+- `sample_data.csv`
 
-The dashboard features a dark cyber intelligence theme optimized for monitoring darknet data leaks:
+The dashboard will automatically reflect the new dataset.
 
-- Modern, responsive layout
-- Dark theme with cybersecurity aesthetics
-- Interactive charts using Plotly
-- Real-time filtering and search
-- Professional threat intelligence presentation
+---
 
-For detailed dashboard documentation, see [DASHBOARD.md](DASHBOARD.md).
+# 🗂️ API Endpoints
 
-### Tailwind CSS
+| Endpoint          | Description                        |
+|-------------------|------------------------------------|
+| `/api/summary`    | Returns leak summary analytics     |
+| `/api/leaks`      | Returns all leaks (JSON)           |
+| `/api/leaks_csv`  | Downloads full leak dataset (CSV)  |
+| `/api/ping`       | Health check                       |
 
-The dashboard uses Tailwind CSS for modern, utility-first styling.
+---
 
-- Run `npm install` once to install dependencies.
-- To build CSS for production: `npm run build:css`
-- During development: `npm run dev:css` in a separate terminal.
-- Then run `python dashboard.py` to start the Dash app.
+# 📝 Project Purpose
 
-## License
+This project was developed as part of a university senior project to demonstrate:
 
-This project is for educational and simulation purposes only.
+- Darknet intelligence simulation
+- Data-driven threat analytics
+- Dashboard UI/UX design
+- Full-stack integration (Python backend + React frontend)
 
-## Contributing
+It is not intended for real-world threat intelligence or monitoring.
 
-Contributions are welcome! Please feel free to submit a Pull Request.
+---
+
+# 🔒 Disclaimer
+
+This tool uses **synthetic data only**.
+It **does not** access, scrape, or monitor the real darknet.
