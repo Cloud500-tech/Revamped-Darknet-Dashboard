@@ -2,7 +2,7 @@ from flask import Flask, jsonify
 from flask_cors import CORS
 import pandas as pd
 
-from leak_detector import LeakDetector  # uses your existing detector logic
+from leak_detector_ml import LeakDetectorML
 
 
 app = Flask(__name__)
@@ -10,30 +10,41 @@ CORS(app)  # allow React frontend to call the API
 
 
 # ------------------------------------------------------------
-# Load data once and run the detector
+# Initialise ML-based leak detector
 # ------------------------------------------------------------
 
-detector = LeakDetector()
+# api.py is inside backend/, models/ is one level up → ../models/leak_model.pkl
+detector = LeakDetectorML(model_path="../models/leak_model.pkl")
 
-# Prefer JSON if available, otherwise fall back to CSV.
-# This uses your sample_data files directly.
+# Load sample data (same as before – JSON first, fallback to CSV)
 try:
     detector.load_json("sample_data.json")
 except FileNotFoundError:
     detector.load_csv("sample_data.csv")
 
-# Run full scan using the built-in method from leak_detector.py
+# Run full scan using the ML detector
 scan_results = detector.scan_all()
 
 
 def build_dataframe() -> pd.DataFrame:
     """
-    Convert scan_results (from LeakDetector) into a DataFrame
-    with explicit columns for the dashboard.
+    Convert ML scan_results into a DataFrame
+    with the SAME columns expected by the dashboard.
+
+    We map:
+    - leak_probability (0–1) → risk_score (0–100)
+    - risk_level (low/moderate/high) is kept
+    - prediction ('leak'/'safe') is stored in patterns for compatibility
     """
     rows = []
     for result in scan_results:
         entry = result["entry"]
+
+        leak_prob = float(result.get("leak_probability", 0.0))
+        risk_level = result.get("risk_level", "low")
+
+        # Convert probability to a 0–100 score for old UI
+        risk_score = int(round(leak_prob * 100))
 
         rows.append(
             {
@@ -42,15 +53,17 @@ def build_dataframe() -> pd.DataFrame:
                 "description": entry.get("description", ""),
                 "content": entry.get("content", ""),
                 "leaked_date": entry.get("leaked_date"),
-                "severity": entry.get("severity", "unknown"),  # from the dataset
-                "risk_score": int(result.get("risk_score", 0)),  # from detector
-                "risk_level": result.get("risk_level", "low"),  # from detector
-                "patterns": result.get("detected_patterns", []),
+                "severity": entry.get("severity", "unknown"),
+                "risk_score": risk_score,
+                "risk_level": risk_level,
+                # Old rule-based engine used detected_patterns (list of strings).
+                # Here we just put the ML prediction inside a list for compatibility.
+                "patterns": [result.get("prediction", "")],
             }
         )
 
     if not rows:
-        # If for some reason nothing was detected, return empty DF with expected columns.
+        # If nothing was detected, return empty DF with expected columns.
         return pd.DataFrame(
             columns=[
                 "id",
@@ -159,6 +172,13 @@ def domains():
 
     return jsonify(domain_stats.to_dict(orient="records"))
 
+@app.get("/api/ml-debug")
+def ml_debug():
+    # returns raw ML results directly
+    return jsonify(scan_results)
+
 
 if __name__ == "__main__":
     app.run(host="0.0.0.0", port=8000, debug=True)
+
+
